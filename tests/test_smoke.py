@@ -6,7 +6,7 @@ import pytest
 
 def test_version_import():
     from multilingual_rag_mcp import __version__
-    assert __version__ == "0.1.0"
+    assert __version__ == "0.2.0"
 
 
 def test_cli_version():
@@ -15,7 +15,7 @@ def test_cli_version():
         capture_output=True, text=True,
     )
     assert result.returncode == 0
-    assert "rag-mcp 0.1.0" in result.stdout
+    assert "rag-mcp 0.2.0" in result.stdout
 
 
 def test_cli_help():
