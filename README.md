@@ -1,4 +1,4 @@
-# rag-mcp
+# multilingual-rag-mcp
 
 Multilingual RAG MCP server for local document search. Query in one language, find content in another.
 
@@ -21,7 +21,7 @@ uvx --from multilingual-rag-mcp rag-mcp index ./docs/
 ### pip from GitHub (latest)
 
 ```bash
-pip install git+https://github.com/aliaksandr-kazarez/rag-mcp.git
+pip install git+https://github.com/aliaksandr-kazarez/multilingual-rag-mcp.git
 ```
 
 ## Quick start
