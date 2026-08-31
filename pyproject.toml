@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "rag-mcp"
+name = "multilingual-rag-mcp"
 version = "0.1.0"
 description = "Multilingual RAG MCP server — cross-lingual search over local documents"
 readme = "README.md"
@@ -33,4 +33,4 @@ Repository = "https://github.com/aliaksandr-kazarez/rag-mcp"
 Issues = "https://github.com/aliaksandr-kazarez/rag-mcp/issues"
 
 [project.scripts]
-rag-mcp = "rag_mcp.__main__:main"
+rag-mcp = "multilingual_rag_mcp.__main__:main"

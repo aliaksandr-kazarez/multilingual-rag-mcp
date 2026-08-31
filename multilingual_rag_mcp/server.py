@@ -7,8 +7,8 @@ from pathlib import Path
 
 from mcp.server.fastmcp import FastMCP
 
-from rag_mcp.ingest import ingest_directory, parse_file
-from rag_mcp.store import VectorStore
+from multilingual_rag_mcp.ingest import ingest_directory, parse_file
+from multilingual_rag_mcp.store import VectorStore
 
 mcp = FastMCP("rag-mcp")
 

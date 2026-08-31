@@ -6,22 +6,22 @@ Built for the common case where you talk to AI agents in English but your docume
 
 ## Install
 
-### One-liner with uvx (no install needed)
-
-```bash
-uvx --from git+https://github.com/aliaksandr-kazarez/rag-mcp.git rag-mcp index ./docs/
-```
-
-### pip from GitHub
-
-```bash
-pip install git+https://github.com/aliaksandr-kazarez/rag-mcp.git
-```
-
 ### pip from PyPI
 
 ```bash
-pip install rag-mcp
+pip install multilingual-rag-mcp
+```
+
+### One-liner with uvx (no install needed)
+
+```bash
+uvx --from multilingual-rag-mcp rag-mcp index ./docs/
+```
+
+### pip from GitHub (latest)
+
+```bash
+pip install git+https://github.com/aliaksandr-kazarez/rag-mcp.git
 ```
 
 ## Quick start
@@ -35,7 +35,7 @@ rag-mcp index ~/documents/
 ### 2. Add to Claude Code
 
 ```bash
-claude mcp add rag -- uvx --from git+https://github.com/aliaksandr-kazarez/rag-mcp.git rag-mcp
+claude mcp add rag -- uvx --from multilingual-rag-mcp rag-mcp
 ```
 
 Set the document paths via env vars:
@@ -43,7 +43,7 @@ Set the document paths via env vars:
 ```bash
 claude mcp add rag \
   -e RAG_DOCS=$HOME/documents \
-  -- uvx --from git+https://github.com/aliaksandr-kazarez/rag-mcp.git rag-mcp
+  -- uvx --from multilingual-rag-mcp rag-mcp
 ```
 
 If installed locally (pip install), use the simpler form:

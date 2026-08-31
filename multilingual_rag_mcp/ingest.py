@@ -172,7 +172,7 @@ def index_cli(args: list[str]) -> None:
         print("   or: RAG_DOCS=/path/to/docs rag-mcp index", file=sys.stderr)
         sys.exit(1)
 
-    from rag_mcp.store import VectorStore
+    from multilingual_rag_mcp.store import VectorStore
 
     store = VectorStore()
     chunk_size = int(os.environ.get("RAG_CHUNK_SIZE", "1000"))

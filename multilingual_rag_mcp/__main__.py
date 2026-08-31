@@ -17,18 +17,18 @@ def main():
             "  RAG_MODEL    Embedding model (default: paraphrase-multilingual-MiniLM-L12-v2)\n"
         )
     elif len(sys.argv) > 1 and sys.argv[1] in ("-V", "--version"):
-        from rag_mcp import __version__
+        from multilingual_rag_mcp import __version__
         print(f"rag-mcp {__version__}")
     elif len(sys.argv) > 1 and sys.argv[1] == "index":
-        from rag_mcp.ingest import index_cli
+        from multilingual_rag_mcp.ingest import index_cli
         index_cli(sys.argv[2:])
     elif len(sys.argv) > 1 and sys.argv[1] == "stats":
-        from rag_mcp.store import VectorStore
+        from multilingual_rag_mcp.store import VectorStore
         import json
         store = VectorStore()
         print(json.dumps(store.stats(), indent=2, ensure_ascii=False))
     else:
-        from rag_mcp.server import mcp
+        from multilingual_rag_mcp.server import mcp
         mcp.run()
 
 
