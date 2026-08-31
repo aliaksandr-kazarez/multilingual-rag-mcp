@@ -4,10 +4,24 @@ Multilingual RAG MCP server for local document search. Query in one language, fi
 
 Built for the common case where you talk to AI agents in English but your documents are in Russian (or any other language). The multilingual embedding model maps semantically similar concepts across 50+ languages to the same vector space — no translation step needed.
 
-## Setup
+## Install
+
+### One-liner with uvx (no install needed)
 
 ```bash
-pip install -e .
+uvx --from git+https://github.com/aliaksandr-kazarez/rag-mcp.git rag-mcp index ./docs/
+```
+
+### pip from GitHub
+
+```bash
+pip install git+https://github.com/aliaksandr-kazarez/rag-mcp.git
+```
+
+### pip from PyPI
+
+```bash
+pip install rag-mcp
 ```
 
 ## Quick start
@@ -18,37 +32,24 @@ pip install -e .
 rag-mcp index ~/documents/
 ```
 
-Or set `RAG_DOCS` and index via the MCP tool:
-
-```bash
-export RAG_DOCS=~/documents/
-rag-mcp index
-```
-
 ### 2. Add to Claude Code
 
 ```bash
-claude mcp add rag \
-  -e RAG_DOCS=$HOME/path/to/docs \
-  -e RAG_DATA=$HOME/.local/share/rag-mcp \
-  -- python -m rag_mcp
+claude mcp add rag -- uvx --from git+https://github.com/aliaksandr-kazarez/rag-mcp.git rag-mcp
 ```
 
-Or add manually to `.claude/settings.json`:
+Set the document paths via env vars:
 
-```json
-{
-  "mcpServers": {
-    "rag": {
-      "command": "python",
-      "args": ["-m", "rag_mcp"],
-      "env": {
-        "RAG_DOCS": "/absolute/path/to/documents",
-        "RAG_DATA": "/absolute/path/to/index/storage"
-      }
-    }
-  }
-}
+```bash
+claude mcp add rag \
+  -e RAG_DOCS=$HOME/documents \
+  -- uvx --from git+https://github.com/aliaksandr-kazarez/rag-mcp.git rag-mcp
+```
+
+If installed locally (pip install), use the simpler form:
+
+```bash
+claude mcp add rag -e RAG_DOCS=$HOME/documents -- rag-mcp
 ```
 
 ### 3. Search
@@ -86,10 +87,12 @@ Markdown files with YAML frontmatter have their metadata (title, date, etc.) ext
 
 ## CLI
 
-```bash
-rag-mcp index <dir> [<dir> ...]   # Index documents
-rag-mcp stats                      # Print index statistics
-rag-mcp                            # Start MCP server (stdio)
+```
+rag-mcp index <dir> [<dir> ...]   Index documents
+rag-mcp stats                     Print index statistics
+rag-mcp                           Start MCP server (stdio)
+rag-mcp --help                    Show help
+rag-mcp --version                 Show version
 ```
 
 ## How it works

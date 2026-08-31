@@ -25,5 +25,9 @@ dependencies = [
     "pymupdf>=1.23",
 ]
 
+[project.urls]
+Repository = "https://github.com/aliaksandr-kazarez/rag-mcp"
+Issues = "https://github.com/aliaksandr-kazarez/rag-mcp/issues"
+
 [project.scripts]
 rag-mcp = "rag_mcp.__main__:main"
