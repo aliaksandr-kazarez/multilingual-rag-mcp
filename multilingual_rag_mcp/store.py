@@ -26,6 +26,7 @@ class VectorStore:
         self,
         data_dir: str | Path | None = None,
         model: str | None = None,
+        collection: str = "documents",
     ):
         data_dir = Path(data_dir or os.environ.get("RAG_DATA", str(DEFAULT_DATA_DIR)))
         data_dir.mkdir(parents=True, exist_ok=True)
@@ -34,7 +35,7 @@ class VectorStore:
         self._ef = _FastEmbedEF(self._model_name)
         self._client = chromadb.PersistentClient(path=str(data_dir / "chroma"))
         self._col = self._client.get_or_create_collection(
-            name="documents",
+            name=collection,
             embedding_function=self._ef,
             metadata={"hnsw:space": "cosine"},
         )
@@ -51,12 +52,14 @@ class VectorStore:
             self._col.delete(ids=existing["ids"])
         return len(existing["ids"])
 
-    def search(self, query: str, n: int = 5) -> list[dict]:
+    def search(self, query: str, n: int = 5, where: dict | None = None) -> list[dict]:
         if self._col.count() == 0:
             return []
-        # Fetch extra candidates to deduplicate by document
         fetch_n = min(n * 3, self._col.count())
-        results = self._col.query(query_texts=[query], n_results=fetch_n)
+        query_kwargs: dict = {"query_texts": [query], "n_results": fetch_n}
+        if where is not None:
+            query_kwargs["where"] = where
+        results = self._col.query(**query_kwargs)
         out = []
         seen_docs: set[str] = set()
         for i in range(len(results["ids"][0])):
